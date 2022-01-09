@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+  </head>
+  <body>
+    <p>This is my page</p>
+    <form id="purchase" method="post" action="/purchase/">
+        {% csrf_token %}
+        <button type="submit" onclick="submitClick()">Click Me!</button>
+    </form>
+  </body>
+</html>
+
+
+<script>
+    function submitClick() {
+        document.getElementById('purchase').submit()
+        console.log('pushData');
+    }
+</script>
