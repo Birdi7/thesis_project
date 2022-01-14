@@ -1,5 +1,6 @@
 from django.db import models
 
+from phonenumber_field.modelfields import PhoneNumberField
 
 class Client(models.Model):
     class Source(models.TextChoices):
@@ -26,7 +27,11 @@ class Client(models.Model):
     source = models.CharField(max_length=255, choices=Source.choices, null=True)
 
     ip = models.CharField(max_length=255, null=True)
-
+    
+    phone = PhoneNumberField(
+        null=True, unique=True, verbose_name="Телефон"
+    )
+    
 
 class Order(models.Model):
     created_at = models.DateTimeField(auto_now=True)

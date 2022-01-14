@@ -1,6 +1,8 @@
 from dataclasses import dataclass, asdict
 from typing import Optional
 
+import phonenumbers
+
 from thesis.models import Client
 from urllib.parse import urlparse, parse_qs
 
@@ -34,12 +36,32 @@ class ClientCreator:
         return Client.objects.create(**params)
 
     @classmethod
-    def from_request(cls, request):
+    def from_order_request(cls, request):
         referer = request.META["HTTP_REFERER"]
         creation_kwargs = {
             "ip": request.META["REMOTE_ADDR"],
             **asdict(parse_utm_labels_from_url(referer)),
-            "source": Client.Source.WEB_SITE
+            "source": Client.Source.WEB_SITE,
         }
 
+        return cls().process(**creation_kwargs)
+
+    @classmethod
+    def from_callibri_request(cls, request):
+        params = {k: v for k, v in request.POST.items()}
+        
+        creation_kwargs = {
+            k: v
+            for k, v in params.items()
+            if k
+            in [
+                "utm_campaign",
+                "utm_content",
+                "utm_medium",
+                "utm_source",
+                "utm_term",
+            ]
+        }
+        creation_kwargs["phone"] = phonenumbers.parse(params["phone"], region="RU")
+        creation_kwargs["google_analytics_id"] = params.get("ua_client_id")
         return cls().process(**creation_kwargs)
