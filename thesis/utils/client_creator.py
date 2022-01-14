@@ -23,8 +23,6 @@ def parse_utm_labels_from_url(url: str) -> UtmLabelsInfo:
     parsed_query = parse_qs(parsed.query)
     # leave only the first value for each query component
     processed = {k: v[0] for k, v in parsed_query.items()}
-    # print("!!!!!!! parsed_query", parsed_query)
-    # print("!!!!!!!! processed", processed)
     return UtmLabelsInfo(**processed)
 
 

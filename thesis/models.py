@@ -26,3 +26,9 @@ class Client(models.Model):
     source = models.CharField(max_length=255, choices=Source.choices, null=True)
 
     ip = models.CharField(max_length=255, null=True)
+
+
+class Order(models.Model):
+    created_at = models.DateTimeField(auto_now=True)
+
+    client = models.ForeignKey(Client, related_name="orders", on_delete=models.CASCADE)
