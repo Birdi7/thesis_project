@@ -133,3 +133,4 @@ try:
 except ImportError:
     print("no env_settings.py found")
 
+HOST = "127.0.0.1"

@@ -1,7 +1,7 @@
+from django.conf import settings
 from django.core.management import BaseCommand
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options) -> None:
-        
-        print("http://localhost:8000/?utm_source=best-source-ever")
+        print(f"http://{settings.HOST}/?utm_source=best-source-ever")

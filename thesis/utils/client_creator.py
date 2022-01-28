@@ -33,7 +33,11 @@ class ClientCreator:
         pass
 
     def process(self, **params):
-        return Client.objects.create(**params)
+        phone = params['phone']
+        return Client.objects.update_or_create(
+            phone=phone,
+            defaults={k:v for k,v in params.items() if k != 'phone'}
+        )[0]
 
     @classmethod
     def from_order_request(cls, request):
