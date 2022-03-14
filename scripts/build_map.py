@@ -7,7 +7,7 @@ from dash import dcc
 from dash import html
 from folium.features import DivIcon
 import subprocess
-
+from pathlib import Path
 
 import json
 import dash
@@ -80,9 +80,11 @@ def _decode_point_from_mysql(value):
     return tuple([float(v) for v in coord_tuple])
 
 
+DATA_LOCATION = Path(__file__).parent.resolve() / "map_location_info.json"
+
+
 def load_data():
-    file_location = "map_location_info.json"
-    with open(file_location, "r") as fp:
+    with open(DATA_LOCATION, "r") as fp:
         result = json.load(fp)
 
     transformed = list()

@@ -4,21 +4,27 @@ import json
 
 
 MOSCOW_BOUNDS = (
-    {"lon": 36.622504, "lat": 53.753215},
-    {"lon": 38.622504, "lat": 57.753215},
+    {"lon": 37.473808, "lat": 55.620953},
+    {"lon": 37.828564, "lat": 55.824604},
 )
 
 _N = 150
 
 POINT_WRITE_FORMAT = "POINT({lon} {lat})"
 
-DESTIONATION = Path(__file__).parent.resolve() / "map_location_info.json"
+DESTINATION = Path(__file__).parent.resolve() / "map_location_info.json"
+
+
+def _random(a, b):
+    assert a <= b
+
+    return random.random() * a + (b - a)
 
 
 def generate_new_point():
     return {
-        "lon": random.uniform(MOSCOW_BOUNDS[0]["lon"], MOSCOW_BOUNDS[1]["lon"]),
-        "lat": random.uniform(MOSCOW_BOUNDS[0]["lat"], MOSCOW_BOUNDS[1]["lat"]),
+        "lon": _random(MOSCOW_BOUNDS[0]["lon"], MOSCOW_BOUNDS[1]["lon"]),
+        "lat": _random(MOSCOW_BOUNDS[0]["lat"], MOSCOW_BOUNDS[1]["lat"]),
     }
 
 
@@ -41,7 +47,7 @@ def write_data(data):
         {"cpl": v["cpl"], "location": _format_point_to_write(v["location"])}
         for v in data
     ]
-    with open(DESTIONATION, "w") as fp:
+    with open(DESTINATION, "w") as fp:
         json.dump(result, fp, indent=4)
 
 
