@@ -1,7 +1,6 @@
+import json
 import random
 from pathlib import Path
-import json
-
 
 MOSCOW_BOUNDS = (
     {"lon": 37.473808, "lat": 55.620953},
@@ -43,10 +42,7 @@ def write_data(data):
     def _format_point_to_write(point):
         return POINT_WRITE_FORMAT.format(lon=point["lon"], lat=point["lat"])
 
-    result = [
-        {"cpl": v["cpl"], "location": _format_point_to_write(v["location"])}
-        for v in data
-    ]
+    result = [{"cpl": v["cpl"], "location": _format_point_to_write(v["location"])} for v in data]
     with open(DESTINATION, "w") as fp:
         json.dump(result, fp, indent=4)
 

@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('thesis', '0003_alter_client_google_analytics_id_alter_client_ip_and_more'),
+        ("thesis", "0003_alter_client_google_analytics_id_alter_client_ip_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='client',
-            name='source',
-            field=models.CharField(choices=[('WEB_SITE', 'Web Site'), ('CALL_CENTER', 'Call Center')], max_length=255, null=True),
+            model_name="client",
+            name="source",
+            field=models.CharField(
+                choices=[("WEB_SITE", "Web Site"), ("CALL_CENTER", "Call Center")],
+                max_length=255,
+                null=True,
+            ),
         ),
     ]

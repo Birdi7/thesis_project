@@ -1,31 +1,22 @@
 https://localhost:8000/?utm_source=best-source-ever
 
 
-abstract chapter 
+abstract chapter
 technology (voximplant & callibri)
 
 
 result sections
-project by quality attributes in results. what we've done, what can be done in future 
+project by quality attributes in results. what we've done, what can be done in future
 
 
 result section about code
 
 
 
-discussion 
+discussion
 summary
 problem describption
 what we done and not done (юристы)
 limitions (security)
 future work
-whys 
-
-
-
-
-
-
-
-
-
+whys

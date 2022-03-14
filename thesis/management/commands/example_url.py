@@ -1,7 +1,7 @@
+from pathlib import Path
+
 from django.conf import settings
 from django.core.management import BaseCommand
-
-from pathlib import Path
 
 
 class Command(BaseCommand):
@@ -15,5 +15,9 @@ class Command(BaseCommand):
             fp.write(uuid + "\n")
 
         print(
-            f"http://{settings.HOST}:8000/?utm_source=best-source-ever&utm_campaign=campaign.123&utm_content=some-content&utm_medium=cpc&ua_client_id={uuid}"
+            (
+                f"http://{settings.HOST}:8000/"
+                "?utm_source=best-source-ever&utm_campaign=campaign.123"
+                "&utm_content=some-content&utm_medium=cpc&ua_client_id={uuid}"
+            )
         )

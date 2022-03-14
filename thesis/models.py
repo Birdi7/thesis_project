@@ -1,5 +1,4 @@
 from django.db import models
-
 from phonenumber_field.modelfields import PhoneNumberField
 
 
@@ -13,9 +12,7 @@ class Client(models.Model):
     created_at = models.DateTimeField(auto_now=True)
 
     # TODO: for website we should take it from cookie?
-    google_analytics_id = models.CharField(
-        max_length=255, verbose_name="Google Analytics ID", null=True
-    )
+    google_analytics_id = models.CharField(max_length=255, verbose_name="Google Analytics ID", null=True)
 
     utm_campaign = models.CharField(max_length=255, null=True)
 

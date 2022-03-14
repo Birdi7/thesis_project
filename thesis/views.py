@@ -3,12 +3,11 @@ from braces.views import JSONRequestResponseMixin
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import JsonResponse
 from django.shortcuts import render
-from django.views.generic import TemplateView
 from django.views import View
+from django.views.generic import TemplateView
 
-from thesis.models import Order, Client
+from thesis.models import Client, Order
 from thesis.utils.client_creator import ClientCreator
-
 
 PHONE_NUMBER_CONTEXT = {"phone_number": "+7 999 999-99-99"}
 
@@ -28,7 +27,7 @@ class CreateOrderView(BaseOrderView):
         # TODO: test with all utm labels
         client = ClientCreator.from_order_request(request)
 
-        _order = Order.objects.create(client=client)
+        Order.objects.create(client=client)
 
         return render(
             request,
@@ -39,9 +38,9 @@ class CreateOrderView(BaseOrderView):
 
 class CallibriView(BaseOrderView):
     def post(self, request: WSGIRequest, *args, **kwargs) -> JsonResponse:
-        params = {k: v for k, v in request.POST.items()}
-
-        _client = ClientCreator.from_callibri_request(request)
+        params = {k: v for k, v in request.POST.items()}  # noqa
+        # TODO: use params somehow
+        ClientCreator.from_callibri_request(request)
 
         return JsonResponse({"status": "OK"}, status=200)
 

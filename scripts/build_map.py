@@ -1,17 +1,12 @@
-from cmath import log10
-from pickle import decode_long
-from wsgiref.handlers import format_date_time
-import folium
+import json
 import os
-from dash import dcc
-from dash import html
-from folium.features import DivIcon
 import subprocess
 from pathlib import Path
 
-import json
 import dash
-
+import folium
+from dash import html
+from folium.features import DivIcon
 
 loc = (55.75, 37.6)
 m = folium.Map(location=loc, zoom_start=10)
@@ -109,9 +104,6 @@ def load_data():
         transformed.append(decoded_value)
 
     return transformed
-
-
-from datetime import datetime
 
 
 def prettify_text(cpl, **kwargs):

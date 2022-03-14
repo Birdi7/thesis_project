@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-97*__k^91x@!6sdrv_evj9q***$!3cybupu0&0c3x8l0m)$lx@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -76,7 +76,7 @@ WSGI_APPLICATION = "thesis_project.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": 'django.db.backends.mysql',
+        "ENGINE": "django.db.backends.mysql",
         "HOST": "localhost",
         "PORT": "3306",
         "NAME": "thesis",
@@ -128,7 +128,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CSRF_COOKIE_SECURE = False
 
 try:
-    from .env_settings import populate_globals 
+    from .env_settings import populate_globals
+
     populate_globals(globals())
 except ImportError:
     print("no env_settings.py found")

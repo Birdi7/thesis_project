@@ -7,21 +7,31 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Client',
+            name="Client",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('google_analytics_id', models.CharField(max_length=255, verbose_name='Google Analytics ID')),
-                ('utm_campaign', models.CharField(max_length=255)),
-                ('utm_content', models.CharField(max_length=255)),
-                ('utm_medium', models.CharField(max_length=255)),
-                ('utm_source', models.CharField(max_length=255)),
-                ('utm_term', models.CharField(max_length=255)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                (
+                    "google_analytics_id",
+                    models.CharField(max_length=255, verbose_name="Google Analytics ID"),
+                ),
+                ("utm_campaign", models.CharField(max_length=255)),
+                ("utm_content", models.CharField(max_length=255)),
+                ("utm_medium", models.CharField(max_length=255)),
+                ("utm_source", models.CharField(max_length=255)),
+                ("utm_term", models.CharField(max_length=255)),
             ],
         ),
     ]

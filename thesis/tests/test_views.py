@@ -15,11 +15,8 @@ class CreateOrderViewTestCase(BaseTestCase):
         self.assertTrue(Order.objects.exists())
 
     def test_with_utm_labels(self):
-        response = self.client.post(
-            "/order/", HTTP_REFERER="http://domain.ru/?utm_source=abc"
-        )
+        response = self.client.post("/order/", HTTP_REFERER="http://domain.ru/?utm_source=abc")
         self.assertEqual(200, response.status_code)
         self.assertTrue(Client.objects.exists())
         client = Client.objects.first()
         self.assertEqual("abc", client.utm_source)
-        

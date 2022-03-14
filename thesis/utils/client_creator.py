@@ -1,12 +1,11 @@
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 from typing import Optional
-from numpy import kaiser
-from thesis.utils.dict import omit
+from urllib.parse import parse_qs, urlparse
 
 import phonenumbers
 
 from thesis.models import Client
-from urllib.parse import urlparse, parse_qs
+from thesis.utils.dict import omit
 
 
 @dataclass
@@ -43,11 +42,9 @@ class ClientCreator:
 
     def process(self, **params):
         defaults = {k: v for k, v in params.items() if k != "phone"}
-        print("!!!!!!!! defaults", defaults)
+        # print("!!!!!!!! defaults", defaults)
         if "google_analytics_id" in defaults:
-            existing = Client.objects.filter(
-                google_analytics_id=defaults["google_analytics_id"]
-            ).first()
+            existing = Client.objects.filter(google_analytics_id=defaults["google_analytics_id"]).first()
             if existing:
                 for k, v in defaults.items():
                     setattr(existing, k, v)
