@@ -1,6 +1,8 @@
---example of db initiatilizaton
-CREATE USER thesis IDENTIFIED BY 'thesis_password_12345';
--- for tests
-GRANT ALL PRIVILEGES ON *.* TO thesis;
 
-CREATE DATABASE thesis;
+CREATE DATABASE IF NOT EXISTS thesis;
+
+CREATE USER IF NOT EXISTS thesis_user IDENTIFIED BY 'thesis_password_12345';
+
+GRANT ALL PRIVILEGES ON *.* TO thesis_user;
+
+

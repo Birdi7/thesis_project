@@ -1,5 +1,7 @@
 from dataclasses import dataclass, asdict
 from typing import Optional
+from numpy import kaiser
+from thesis.utils.dict import omit
 
 import phonenumbers
 
@@ -14,6 +16,13 @@ class UtmLabelsInfo:
     utm_medium: Optional[str] = None
     utm_source: Optional[str] = None
     utm_term: Optional[str] = None
+    ua_client_id: Optional[str] = None
+
+    def to_dict(self):
+        return {
+            **omit(asdict(self), ["ua_client_id"]),
+            "google_analytics_id": self.ua_client_id,
+        }
 
 
 # TODO: move to another file
@@ -33,18 +42,29 @@ class ClientCreator:
         pass
 
     def process(self, **params):
-        phone = params['phone']
-        return Client.objects.update_or_create(
-            phone=phone,
-            defaults={k:v for k,v in params.items() if k != 'phone'}
-        )[0]
+        defaults = {k: v for k, v in params.items() if k != "phone"}
+        print("!!!!!!!! defaults", defaults)
+        if "google_analytics_id" in defaults:
+            existing = Client.objects.filter(
+                google_analytics_id=defaults["google_analytics_id"]
+            ).first()
+            if existing:
+                for k, v in defaults.items():
+                    setattr(existing, k, v)
+                existing.save()
+                return existing
+            else:
+                created = Client.objects.create(**defaults)
+                return created
+
+        return Client.objects.create(**defaults)
 
     @classmethod
     def from_order_request(cls, request):
         referer = request.META["HTTP_REFERER"]
         creation_kwargs = {
             "ip": request.META["REMOTE_ADDR"],
-            **asdict(parse_utm_labels_from_url(referer)),
+            **parse_utm_labels_from_url(referer).to_dict(),
             "source": Client.Source.WEB_SITE,
         }
 
@@ -53,7 +73,7 @@ class ClientCreator:
     @classmethod
     def from_callibri_request(cls, request):
         params = {k: v for k, v in request.POST.items()}
-        
+
         creation_kwargs = {
             k: v
             for k, v in params.items()

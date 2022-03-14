@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -10,7 +11,17 @@
         {% csrf_token %}
         <button type="submit" onclick="submitClick()">Make an order</button>
     </form>
-    <p>8 991 124-31-31</p>
+    <script src="//cdn.callibri.ru/callibri.js" type="text/javascript" charset="utf-8"></script>
+    <div id="call-center-phone">
+      {{ phone_number }}
+    </div>
+    
+    {% if message != '' %} 
+      <div>
+        {{ message }}
+      </div>
+
+    {% endif %}
   </body>
 </html>
 

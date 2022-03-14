@@ -1,5 +1,5 @@
 
 def populate_globals(g):
     print("!!!!!!!!! in populate_globals")
-    g["DATABASES"]["default"]["USER"] = "thesis"
+    g["DATABASES"]["default"]["USER"] = "thesis_user"
     g["DATABASES"]["default"]["PASSWORD"] = "thesis_password_12345"
