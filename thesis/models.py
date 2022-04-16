@@ -1,3 +1,4 @@
+from django.contrib.gis.db.models import PointField
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -31,7 +32,13 @@ class Client(models.Model):
     phone = PhoneNumberField(null=True, unique=True, verbose_name="Телефон")
 
 
+class Address(models.Model):
+    location = PointField(srid=4326, null=True, help_text="location point")
+
+
 class Order(models.Model):
     created_at = models.DateTimeField(auto_now=True)
 
     client = models.ForeignKey(Client, related_name="orders", on_delete=models.CASCADE)
+
+    address = models.ForeignKey(Address, null=True, related_name="orders", on_delete=models.SET_NULL)

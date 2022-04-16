@@ -1,12 +1,14 @@
 # Create your views here.
 from braces.views import JSONRequestResponseMixin
+from django.contrib.gis.geos import Point
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import TemplateView
 
-from thesis.models import Client, Order
+from thesis.models import Address, Client, Order
+from thesis.utils.address import AddressParser
 from thesis.utils.client_creator import ClientCreator
 
 PHONE_NUMBER_CONTEXT = {"phone_number": "+7 999 999-99-99"}
@@ -24,10 +26,13 @@ class BaseOrderView(View):
 
 class CreateOrderView(BaseOrderView):
     def post(self, request: WSGIRequest):
-        # TODO: test with all utm labels
+        address = AddressParser.from_string(request.POST["address"])
         client = ClientCreator.from_order_request(request)
-
-        Order.objects.create(client=client)
+        if address:
+            address_model = Address.objects.create(location=Point(address.x, address.y))
+            Order.objects.create(client=client, address=address_model)
+        else:
+            Order.objects.create(client=client)
 
         return render(
             request,

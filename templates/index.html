@@ -9,6 +9,9 @@
     <p>Buy my stuff</p>
     <form id="order" method="post" action="/order/">
         {% csrf_token %}
+        <label for="address">Адрес заказа</label>
+        <input name="address" required id="address">
+
         <button type="submit" onclick="submitClick()">Make an order</button>
     </form>
     <script src="//cdn.callibri.ru/callibri.js" type="text/javascript" charset="utf-8"></script>

@@ -17,14 +17,19 @@ DESTINATION = Path(__file__).parent.resolve() / "map_location_info.json"
 def _random(a, b):
     assert a <= b
 
-    return random.random() * a + (b - a)
+    return random.random() * (b - a) + a
 
 
 def generate_new_point():
-    return {
+    result = {
         "lon": _random(MOSCOW_BOUNDS[0]["lon"], MOSCOW_BOUNDS[1]["lon"]),
         "lat": _random(MOSCOW_BOUNDS[0]["lat"], MOSCOW_BOUNDS[1]["lat"]),
     }
+
+    for key in ["lon", "lat"]:
+        assert MOSCOW_BOUNDS[0][key] < result[key] < MOSCOW_BOUNDS[1][key], str(result)
+
+    return result
 
 
 def generate_cpl():

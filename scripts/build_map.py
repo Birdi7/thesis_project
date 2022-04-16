@@ -9,7 +9,7 @@ from dash import html
 from folium.features import DivIcon
 
 loc = (55.75, 37.6)
-m = folium.Map(location=loc, zoom_start=10)
+m = folium.Map(location=loc, zoom_start=12)
 
 
 def add_data_point(location, cpl_value):
@@ -113,8 +113,7 @@ def prettify_text(cpl, **kwargs):
     return f"{formatted_cpl}"
 
 
-def draw_the_map():
-    data = load_data()
+def draw_the_map(data):
     for point in data:
         pretty_text = prettify_text(**point)
         add_data_point(point["location"], pretty_text)
@@ -128,5 +127,6 @@ def run_server():
 
 
 if __name__ == "__main__":
-    draw_the_map()
+    data = load_data()
+    draw_the_map(data)
     run_server()

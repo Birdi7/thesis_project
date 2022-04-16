@@ -20,3 +20,13 @@ what we done and not done (юристы)
 limitions (security)
 future work
 whys
+
+TODO:
+— точки на карте???????
+
+
+
+ограничения
+ — соглавание с юристом
+ — платные vox & callibri. research has no financial support
+ —

@@ -76,7 +76,7 @@ WSGI_APPLICATION = "thesis_project.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
+        "ENGINE": "django.contrib.gis.db.backends.mysql",
         "HOST": "localhost",
         "PORT": "3306",
         "NAME": "thesis",
@@ -127,11 +127,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CSRF_COOKIE_SECURE = False
 
+YANDEX_API_KEY = "invalid"
+
+HOST = "127.0.0.1"
+
 try:
     from .env_settings import populate_globals
 
     populate_globals(globals())
 except ImportError:
     print("no env_settings.py found")
-
-HOST = "127.0.0.1"
