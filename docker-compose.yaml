@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  thesis_server:
+    build:
+      context: .
+    image: birdi7/thesisserver
+    container_name: thesisserver
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    environment:
+      - ENV=DOCKER
+  db:
+    image: mysql
+    container_name: thesis_db
+    platform: linux/x86_64
+    environment:
+      MYSQL_ROOT_PASSWORD: thesis_password_12345
+    volumes:
+      - ./tmp/mysql/data:/var/lib/mysql:delegated
