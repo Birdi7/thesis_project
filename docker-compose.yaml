@@ -20,3 +20,15 @@ services:
       MYSQL_ROOT_PASSWORD: thesis_password_12345
     volumes:
       - ./tmp/mysql/data:/var/lib/mysql:delegated
+  map:
+    build:
+      context: .
+      dockerfile: Map.dockerfile
+    image: birdi7/thesismap
+    container_name: thesismap
+    depends_on:
+      - db
+    environment:
+      - ENV=DOCKER
+    ports:
+      - "8050:8050"
