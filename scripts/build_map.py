@@ -192,7 +192,7 @@ def run_server():
         host = "0.0.0.0"
     else:
         host = "localhost"
-    port = 8005
+    port = 8050
     print(f"Listen on {host}:{port}")
     app.run_server(host=host, port=port, debug=True)
 
