@@ -96,6 +96,7 @@ env = os.getenv("ENV")
 def _db_connection():
     if env != "DOCKER":
         db = MySQLdb.connect(passwd="thesis_password_12345", db="thesis", user="thesis_user", host="localhost")
+        return db
     else:
         i = 0
         while True:
@@ -191,7 +192,9 @@ def run_server():
         host = "0.0.0.0"
     else:
         host = "localhost"
-    app.run_server(host=host, debug=True)
+    port = 8005
+    print(f"Listen on {host}:{port}")
+    app.run_server(host=host, port=port, debug=True)
 
 
 if __name__ == "__main__":
