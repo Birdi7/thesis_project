@@ -10,4 +10,4 @@ RUN pip install --no-cache-dir gunicorn
 
 COPY . .
 
-CMD ["gunicorn", "--timeout=50", "--bind=0.0.0.0:8000", "thesis_project.wsgi"]
+CMD ["gunicorn", "--timeout=50", "--bind=0.0.0.0:80", "thesis_project.wsgi"]
