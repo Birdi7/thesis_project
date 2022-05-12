@@ -15,10 +15,17 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Address",
             fields=[
-                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
                 (
                     "location",
-                    django.contrib.gis.db.models.fields.PointField(help_text="location point", null=True, srid=4326),
+                    django.contrib.gis.db.models.fields.PointField(
+                        help_text="location point", null=True, srid=4326
+                    ),
                 ),
             ],
         ),
@@ -26,7 +33,10 @@ class Migration(migrations.Migration):
             model_name="order",
             name="address",
             field=models.ForeignKey(
-                null=True, on_delete=django.db.models.deletion.SET_NULL, related_name="orders", to="thesis.address"
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="orders",
+                to="thesis.address",
             ),
         ),
     ]

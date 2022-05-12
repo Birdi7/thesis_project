@@ -15,7 +15,6 @@ m = folium.Map(location=loc, zoom_start=12)
 
 
 def add_data_point(location, cpl_value):
-    print(f"!!!!!!! add_data_point({location}, {cpl_value})")
     folium.Marker(
         location=location,
         tooltip=cpl_value,
@@ -95,7 +94,9 @@ env = os.getenv("ENV")
 
 def _db_connection():
     if env != "DOCKER":
-        db = MySQLdb.connect(passwd="thesis_password_12345", db="thesis", user="thesis_user", host="localhost")
+        db = MySQLdb.connect(
+            passwd="thesis_password_12345", db="thesis", user="thesis_user", host="localhost"
+        )
         return db
     else:
         i = 0
@@ -128,10 +129,6 @@ def _load_data_from_db():
 
 def load_data():
     res = _load_data_from_db()
-    print("len of fetched result: ", len(res))
-    from pprint import pprint
-
-    pprint(res)
     return res
 
 
